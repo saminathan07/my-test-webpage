@@ -84,6 +84,14 @@ contactForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   await sendContact();
 });
+// Force dark theme for testing — remove later if you want theme toggle
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    document.body.setAttribute('data-theme', 'dark');
+    document.documentElement.style.colorScheme = 'dark';
+  } catch(e) { /* ignore */ }
+});
+
 
 async function sendContact() {
   const nameEl = document.getElementById("cname");
