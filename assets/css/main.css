@@ -1,12 +1,29 @@
-:root{
+/* fallback and strong defaults */
+:root {
   --bg: #041226;
   --card: #071427;
   --accent: #60a5fa;
   --glass: rgba(255,255,255,0.02);
   --muted: #99a3b2;
+  --text: #e6eef6;
 }
 
+/* light-theme overrides (optional) */
+body[data-theme="light"] {
+  --bg: #ffffff;
+  --card: #ffffff;
+  --accent: #60a5fa;
+  --glass: rgba(0,0,0,0.03);
+  --muted: #9aa6b5;
+  --text: #031226;
+}
+
+/* apply */
 body {
+  background: linear-gradient(180deg, var(--bg), #020617 60%);
+  color: var(--text);
+}
+
   margin: 0;
   font-family: "Inter", system-ui, sans-serif;
   background: linear-gradient(180deg, var(--bg), #020617 60%);
