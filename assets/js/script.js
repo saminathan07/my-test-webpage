@@ -1,11 +1,6 @@
 // ---------- CONFIG ----------
-/*
- If you want Formspree (no-backend) set FORMSPREE_ID to your id (example: 'xbjqwzrl')
- Steps: sign up at https://formspree.io, create a form -> you'll get an ID like /f/ID
- If left blank, the code will fallback to mailto: behavior.
-*/
-const FORMSPREE_ID = ""; // <-- put your Formspree ID here (only the ID part, not full URL)
-const CONTACT_EMAIL = "saminathanviviv15promail@example.com"; // <-- replace with your real email
+const FORMSPREE_ID = ""; // If you have a Formspree form ID, put it here (example: 'xbjqwzrl')
+const CONTACT_EMAIL = "saminathanviviv15promail@example.com";
 
 // ---------- Data ----------
 const PROJECTS = [
@@ -30,7 +25,8 @@ function render(filter = "all") {
   list.forEach(p => {
     const div = document.createElement("div");
     div.className = "proj";
-    div.innerHTML = `<h3>${p.title}</h3><p style="color:var(--muted);margin:6px 0">${p.desc}</p>
+    div.innerHTML = `<h3>${p.title}</h3>
+      <p style="color:var(--muted);margin:6px 0">${p.desc}</p>
       <div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>`;
     div.onclick = () => openModal(p);
     grid.appendChild(div);
@@ -84,6 +80,11 @@ document.getElementById("copyEmail").addEventListener("click", async () => {
 document.getElementById("year").textContent = new Date().getFullYear();
 
 // ---------- Contact send (Formspree fallback to mailto) ----------
+contactForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  await sendContact();
+});
+
 async function sendContact() {
   const nameEl = document.getElementById("cname");
   const emailEl = document.getElementById("cemail");
@@ -107,12 +108,7 @@ async function sendContact() {
   if (FORMSPREE_ID && FORMSPREE_ID.trim() !== "") {
     try {
       const endpoint = `https://formspree.io/f/${FORMSPREE_ID}`;
-      const payload = {
-        name,
-        _replyto: email,
-        message: msg
-      };
-
+      const payload = { name, _replyto: email, message: msg };
       const res = await fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -123,7 +119,6 @@ async function sendContact() {
         sendStatus.textContent = "Message sent — thank you!";
         contactForm.reset();
       } else {
-        // fallback to mailto if Formspree fails
         sendStatus.textContent = "Form service error — opening mail client...";
         fallbackMailto(name, email, msg);
       }
