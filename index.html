@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Saminathan — Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-theme="dark">
+  <div class="container">
+    <header>
+      <div class="brand">Saminathan S</div>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+        <button id="themeToggle" class="btn" title="Toggle theme">🌗</button>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="hero-card">
+        <h1>Hello — I'm <span id="nameInline">Saminathan S</span></h1>
+        <p id="tagline">I build web apps and small tools. I like JS, Python and clean UI.</p>
+        <div class="skills">
+          <div class="chip">JavaScript</div>
+          <div class="chip">HTML & CSS</div>
+          <div class="chip">FastAPI</div>
+          <div class="chip">Docker</div>
+        </div>
+        <a class="cta" href="#projects">View Projects</a>
+      </div>
+
+      <aside>
+        <div class="hero-card" style="text-align:center">
+          <div class="avatar"></div>
+          <p style="margin-top:12px;color:var(--muted)">Full-stack-web Developer</p>
+          <div style="margin-top:12px">
+            <button class="btn" id="copyEmail">Copy Email</button>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+      <div>
+        <h2>About me</h2>
+        <p>I am a CS student who loves building useful projects. I enjoy turning ideas into clean, maintainable code.</p>
+        <div style="margin-top:12px">
+          <strong>Key skills</strong>
+          <div class="skills" style="margin-top:8px">
+            <div class="chip">React (learning)</div>
+            <div class="chip">FastAPI</div>
+            <div class="chip">Node & Express</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3>Quick stats</h3>
+        <p style="color:var(--muted)">Projects: <strong id="projCount">0</strong> · Experience: Intern </p>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="filters" id="filterBar">
+        <button class="btn active" data-filter="all">All</button>
+        <button class="btn" data-filter="web">Web</button>
+        <button class="btn" data-filter="ml">ML</button>
+        <button class="btn" data-filter="tools">Tools</button>
+      </div>
+      <div class="projects-grid" id="projectsGrid"></div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" style="margin-top:22px">
+      <h2>Contact</h2>
+      <p style="color:var(--muted)">Send me a message or email me — you can also use the Copy Email button above.</p>
+
+      <form id="contactForm" onsubmit="event.preventDefault(); sendContact()" style="margin-top:8px">
+        <div class="contact">
+          <div class="field">
+            <label for="cname">Name</label>
+            <input id="cname" name="name" type="text" placeholder="Your name" required />
+          </div>
+          <div class="field">
+            <label for="cemail">Email</label>
+            <input id="cemail" name="email" type="email" placeholder="you@example.com" required />
+          </div>
+        </div>
+
+        <div style="margin-top:12px" class="field">
+          <label for="cmsg">Message</label>
+          <textarea id="cmsg" name="message" placeholder="Write your message..." required></textarea>
+        </div>
+
+        <div style="margin-top:10px">
+          <button class="btn" id="sendBtn" type="submit">Send Message</button>
+          <span id="sendStatus" style="margin-left:12px;color:var(--muted);display:none">Sending…</span>
+        </div>
+      </form>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> Saminathan S</div>
+      <div style="color:var(--muted)">Built with ❤️ using HTML, CSS, JS</div>
+    </footer>
+  </div>
+
+  <!-- Modal -->
+  <div id="modalBack" class="modal-backdrop" role="dialog" aria-hidden="true">
+    <div class="modal" role="document">
+      <button id="closeModal" class="btn" style="float:right">Close</button>
+      <h2 id="mTitle">Project Title</h2>
+      <p id="mDesc">Description</p>
+      <div id="mLinks" style="margin-top:12px"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
